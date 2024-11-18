@@ -99,6 +99,62 @@ The server will start at `http://localhost:1337`.
 
 ## Project Details
 
+### Authentication
+
+This project uses the **users-permissions plugin** with **Auth0** as the provider for user authentication. Ensure your Auth0 application is set up with the following:
+
+- **Allowed Callback URLs**: `http://localhost:1337/connect/auth0/callback`
+- **Allowed Logout URLs**: `http://localhost:1337`
+
+Users must authenticate via Auth0 before accessing the API.
+
+#### Process
+
+1. Open the URL `/api/connect/auth0` in your browser. This will redirect you to the Auth0 authentication page.
+
+2. Log in or sign up using your Auth0 credentials.
+
+3. After successful authentication, you will be redirected to:
+
+```
+http://localhost:1337/api/auth/auth0/callback
+```
+
+#### Using
+
+Use the JWT token in subsequent API requests by adding it to the Authorization header as a Bearer token:
+If the authentication is successful, a JWT token will be issued.
+
+```curl
+Authorization: Bearer ${jwt}
+
+```
+
+Example jwt Token:
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTczMTk0NjAxNX0.XjPQ240y1aLyN-3Fda1H3SojeGzyRrK0S1N5jMHIO0o
+
+```
+
+#### Verify
+
+Verify your authentication status using the following endpoint:
+
+Check Authentication Status:
+
+- URL: http://localhost:1337/api/auth/status
+- Curl Example:
+
+```bash
+curl -X GET http://localhost:1337/api/auth/status \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTczMTk0NjAxNX0.XjPQ240y1aLyN-3Fda1H3SojeGzyRrK0S1N5jMHIO0o"
+```
+
+If successful, the response will confirm your authenticated status.
+
+---
+
 ### Messages
 
 #### Collection
@@ -134,63 +190,6 @@ The `Messages` collection contains the following fields:
 
 - **Endpoint**: `DELETE /api/messages/:id`
 - **Description**: Deletes a message if it belongs to the authenticated user.
-
-### Authentication
-
-This project uses the **users-permissions plugin** with **Auth0** as the provider for user authentication. Ensure your Auth0 application is set up with the following:
-
-- **Allowed Callback URLs**: `http://localhost:1337/connect/auth0/callback`
-- **Allowed Logout URLs**: `http://localhost:1337`
-
-Users must authenticate via Auth0 before accessing the API.
-
-#### Process
-
-1. Open the URL /api/connect/auth0 in your browser. This will redirect you to the Auth0 authentication page.
-
-2. Log in or sign up using your Auth0 credentials.
-
-3. After successful authentication, you will be redirected to:
-
-```
-http://localhost:1337/api/auth/auth0/callback?
-```
-
-#### Using
-
-Use the JWT token in subsequent API requests by adding it to the Authorization header as a Bearer token:
-If the authentication is successful, a JWT token will be issued.
-
-```curl
-
-Authorization: Bearer ${jwt}
-
-```
-
-Example jwt Token:
-
-```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTczMTk0NjAxNX0.XjPQ240y1aLyN-3Fda1H3SojeGzyRrK0S1N5jMHIO0o
-
-```
-
-#### Verify
-
-Verify your authentication status using the following endpoint:
-
-Check Authentication Status:
-
-- URL: http://localhost:1337/api/auth/status
-- Curl Example:
-
-```bash
-curl -X GET http://localhost:1337/api/auth/status \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTczMTk0NjAxNX0.XjPQ240y1aLyN-3Fda1H3SojeGzyRrK0S1N5jMHIO0o"
-```
-
-If successful, the response will confirm your authenticated status.
-
----
 
 ## Deployment
 
