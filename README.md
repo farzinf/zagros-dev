@@ -4,7 +4,7 @@ This document describes a home assignment for the **Backend Developer** position
 
 ---
 
-## Requirements [:paperclip:](https://github.com/farzinf/zagros-dev/blob/master/documents/Backend-position-home-assignment.pdf)
+## Requirements [:paperclip:](https://github.com/farzinf/zagros-dev/blob/master/documents/Backend-position-home-assignment.pdf){:target="\_blank"}
 
 ### Core Tasks
 
@@ -75,7 +75,7 @@ Replace the placeholders with your actual Auth0 credentials.
 
 ### 4. Enable and Configure Auth0 Provider
 
-1. create Auth0 account and create application [docs](https://docs.strapi.io/dev-docs/plugins/users-permissions#setting-up-the-provider---examples)
+1. create Auth0 account and create application [docs](https://docs.strapi.io/dev-docs/plugins/users-permissions#setting-up-the-provider---examples){:target="\_blank"}
 2. Log in to the **Strapi Admin Panel**.
 3. Navigate to **Settings** → **Users & Permissions Plugin** → **Providers**.
 4. Enable the **Auth0** provider and configure it with the following details:
