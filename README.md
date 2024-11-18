@@ -144,7 +144,7 @@ This project uses the **users-permissions plugin** with **Auth0** as the provide
 
 Users must authenticate via Auth0 before accessing the API.
 
-### Process
+#### Process
 
 1. Open the URL /api/connect/auth0 in your browser. This will redirect you to the Auth0 authentication page.
 
@@ -156,8 +156,10 @@ Users must authenticate via Auth0 before accessing the API.
 http://localhost:1337/api/auth/auth0/callback?
 ```
 
-4. Use the JWT token in subsequent API requests by adding it to the Authorization header as a Bearer token:
-   If the authentication is successful, a JWT token will be issued.
+#### Using
+
+Use the JWT token in subsequent API requests by adding it to the Authorization header as a Bearer token:
+If the authentication is successful, a JWT token will be issued.
 
 ```curl
 
@@ -172,7 +174,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTczMTk0NjAxNX0.XjPQ240
 
 ```
 
-5. Verify your authentication status using the following endpoint:
+#### Verify
+
+Verify your authentication status using the following endpoint:
 
 Check Authentication Status:
 
