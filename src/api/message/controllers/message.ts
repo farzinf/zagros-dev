@@ -4,10 +4,7 @@ import { PolicyContext } from "../../auth/policies/is-authenticated";
 export default factories.createCoreController(
   "api::message.message",
   ({ strapi }) => ({
-    // Method to create a new message
     async create(ctx: PolicyContext) {
-      console.log({ body: ctx.request.body });
-      console.log({ user: ctx.state.user });
       const { content, recipientId } = ctx.request.body;
 
       try {
@@ -36,7 +33,7 @@ export default factories.createCoreController(
 
     // Method to find messages for a user
     async find(ctx: PolicyContext) {
-      const { userId } = ctx.query;
+      const userId = ctx.state.user.id;
 
       try {
         const messages = await strapi
