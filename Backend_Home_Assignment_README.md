@@ -53,8 +53,8 @@ Ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/backend-home-assignment.git
-cd backend-home-assignment
+git clone https://github.com/farzinf/zagros-dev.git
+cd zagros-dev
 ```
 
 ### 2. Install Dependencies
