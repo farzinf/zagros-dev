@@ -87,7 +87,14 @@ Replace the placeholders with your actual Auth0 credentials.
 
 5. Save the configuration.
 
-### 5. Start the Development Server
+### 5. add permission to default role `Authenticated` for authenticated user
+
+1.  Log in to the **Strapi Admin Panel** and go `settings > users-permissions > roles` or url `/admin/settings/users-permissions/roles` .
+2.  in `Permissions` section expand `Auth` add `status` permission in url `GET /api/auth/status`
+3.  in `Permissions` section expand `Message` add `select all` permission
+4.  Save the configuration.
+
+### 6. Start the Development Server
 
 ```bash
 npm run develop
