@@ -1,0 +1,94 @@
+import { factories } from "@strapi/strapi";
+import jwt, { JwtPayload } from "jsonwebtoken";
+
+type AuthIdTokenPayload = {
+  given_name: string; // "Farzin";
+  family_name: string; // "Falahati";
+  nickname: string; // "farzin.falahati";
+  name: string; // "Farzin Falahati";
+  picture: string; // "https://lh3.googleusercontent.com/a/ACg8ocIP1Hk3YAap4MKO4QTBtSAUHuJWqzYNmUt1_zbakwz2U9ZVS1Ks=s96-c";
+  updated_at: Date; //"2024-11-17T07:17:55.157Z";
+  email: string; //"farzin.falahati@gmail.com";
+  email_verified: boolean; // true;
+  iss: string; //"https://farzin.auth0.com/";
+  aud: string; //"AXGwp0E1k5syjXzntCCpJiwsaKAbxB1z";
+  iat: number; //1731827877;
+  exp: number; //1731863877;
+  sub: string; //"google-oauth2|115248546599747046086";
+  sid: string; //"Io0v5K3hv0gVNDHZ2Bk_0vuq5WtoNzn6";
+};
+export default factories.createCoreService("api::auth.auth0", ({ strapi }) => ({
+  decodeIdToken(token: string): AuthIdTokenPayload {
+    // if (!token) {
+    //   return ctx.badRequest("id_token is required");
+    // }
+
+    // try {
+    // Decode the token without verification
+    const decoded = jwt.decode(token) as AuthIdTokenPayload;
+    // id_token payload decrepted:
+    // {
+    //   "given_name": "Farzin",
+    //   "family_name": "Falahati",
+    //   "nickname": "farzin.falahati",
+    //   "name": "Farzin Falahati",
+    //   "picture": "https://lh3.googleusercontent.com/a/ACg8ocIP1Hk3YAap4MKO4QTBtSAUHuJWqzYNmUt1_zbakwz2U9ZVS1Ks=s96-c",
+    //   "updated_at": "2024-11-17T07:17:55.157Z",
+    //   "email": "farzin.falahati@gmail.com",
+    //   "email_verified": true,
+    //   "iss": "https://farzin.auth0.com/",
+    //   "aud": "AXGwp0E1k5syjXzntCCpJiwsaKAbxB1z",
+    //   "iat": 1731827877,
+    //   "exp": 1731863877,
+    //   "sub": "google-oauth2|115248546599747046086",
+    //   "sid": "Io0v5K3hv0gVNDHZ2Bk_0vuq5WtoNzn6"
+    // }
+
+    // Optionally verify the token if you have the public key or secret
+    // const verified = jwt.verify(id_token, process.env.AUTH0_PUBLIC_KEY); // Uncomment if needed
+
+    return decoded;
+    // } catch (error) {
+    //   console.error("Error decoding id_token:", error);
+    //   // return ctx.internalServerError("Failed to decode id_token");
+    // }
+  },
+
+  async decodeAccessToken(token: string) {
+    // if (!token) {
+    //   return ctx.badRequest("id_token is required");
+    // }
+
+    try {
+      // Decode the token without verification
+      const decoded = jwt.decode(token);
+
+      // Optionally verify the token if you have the public key or secret
+      // const verified = jwt.verify(id_token, process.env.AUTH0_PUBLIC_KEY); // Uncomment if needed
+
+      return decoded;
+    } catch (error) {
+      console.error("Error decoding id_token:", error);
+      throw error;
+    }
+  },
+
+  async auth0UserLoginSuccessfullyHandler(
+    user: any /*PluginUsersPermissionsUser*/
+  ) {
+    // if (!tokenId) {
+    //   return ctx.badRequest("id_token is required");
+    // }
+
+    try {
+      // Decode the tokenId without verification
+      // const decoded = jwt.decode(tokenId);
+      // // Optionally verify the token if you have the public key or secret
+      // const verified = jwt.verify(id_token, process.env.AUTH0_PUBLIC_KEY); // Uncomment if needed
+      // return decoded;
+    } catch (error) {
+      // console.error("Error decoding id_token:", error);
+      // return ctx.internalServerError("Failed to decode id_token");
+    }
+  },
+}));

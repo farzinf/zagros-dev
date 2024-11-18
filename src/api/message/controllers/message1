@@ -1,0 +1,76 @@
+import { factories } from "@strapi/strapi";
+
+export default factories.createCoreController(
+  "api::message.message",
+  ({ strapi }) => ({
+    // Method to create a new message
+    async create(ctx) {
+      const { content, senderId, recipientId } = ctx.request.body;
+
+      if (!content || !senderId || !recipientId) {
+        return ctx.badRequest(
+          "Content, senderId, and recipientId are required"
+        );
+      }
+
+      // Create a new message
+      const message = await strapi.entityService.create(
+        "api::message.message",
+        {
+          data: {
+            content,
+            sender: senderId,
+            recipient: recipientId,
+          },
+        }
+      );
+
+      return ctx.created(message);
+    },
+
+    // Method to delete a message by ID
+    async delete(ctx) {
+      const { id } = ctx.params;
+
+      // Check if the message exists
+      const message = await strapi.entityService.findOne(
+        "api::message.message",
+        id
+      );
+      if (!message) {
+        return ctx.notFound("Message not found");
+      }
+
+      // Delete the message
+      await strapi.entityService.delete("api::message.message", id);
+
+      return ctx.send({ message: "Message deleted successfully" });
+    },
+
+    // Method to find messages with optional filtering
+    async find(ctx) {
+      const { senderId, recipientId } = ctx.query;
+
+      // Build filters based on query parameters
+      const filters = {};
+
+      if (senderId) {
+        filters.sender = senderId;
+      }
+
+      if (recipientId) {
+        filters.recipient = recipientId;
+      }
+
+      const messages = await strapi.entityService.findMany(
+        "api::message.message",
+        {
+          filters,
+          populate: ["sender", "recipient"],
+        }
+      );
+
+      return ctx.send(messages);
+    },
+  })
+);

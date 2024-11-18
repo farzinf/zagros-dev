@@ -1,0 +1,37 @@
+export default {
+  routes: [
+    {
+      method: "GET",
+      path: "/messages",
+      handler: "message.find",
+      config: {
+        policies: ["api::message.is-authenticated"], // Updated policy path
+        auth: {
+          scope: ["messages.find"],
+        },
+      },
+    },
+    {
+      method: "POST",
+      path: "/messages",
+      handler: "message.create",
+      config: {
+        policies: ["api::message.is-authenticated"], // Updated policy path
+        auth: {
+          scope: ["messages.create"],
+        },
+      },
+    },
+    {
+      method: "DELETE",
+      path: "/messages/:id",
+      handler: "message.delete",
+      config: {
+        policies: ["api::message.is-authenticated"], // Updated policy path
+        auth: {
+          scope: ["messages.delete"],
+        },
+      },
+    },
+  ],
+};
