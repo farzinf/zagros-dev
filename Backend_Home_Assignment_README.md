@@ -8,32 +8,32 @@ This document describes a home assignment for the **Backend Developer** position
 
 ### Core Tasks
 
-1. **Messages Collection**:
+1. **Messages Collection :white_check_mark:**:
 
    - Create a collection type called `Messages`.
    - Each message should have a relationship with the `Users` table.
 
-2. **Custom API Endpoints**:
+2. **Custom API Endpoints :white_check_mark:**:
 
    - Manually implement API endpoints for **getting** and **creating** messages. Do not use Strapi's default CRUD APIs for these operations.
    - Implement an endpoint to **delete messages** (can use Strapi’s default DELETE API).
 
-3. **Access Control**:
+3. **Access Control :white_check_mark:**:
 
    - Users should only have access to their own messages.
    - Ensure no user can access messages belonging to others.
 
-4. **Documentation**:
+4. **Documentation :white_check_mark:**:
    - Provide a detailed guide for getting, creating, and deleting messages.
 
 ### Bonus Features
 
-- **Third-Party Authentication**:
+- **Third-Party Authentication :white_check_mark:**:
 
   - Implement authentication using a third-party provider (e.g., Firebase, Auth0).
   - This project uses **Auth0** for user authentication.
 
-- **Live Version**:
+- **Live Version :x:**:
   - Host and provide a link to a live version of the service.
 
 ---
@@ -97,7 +97,8 @@ The `Messages` collection contains the following fields:
 
 - **id**: Auto-generated unique identifier.
 - **content**: Text field to store the message content.
-- **user**: Relation to the `Users` table (one-to-many).
+- **sender**: Relation to the `Users` table (one-to-many).
+- **recipient**: Relation to the `Users` table (one-to-many).
 
 ### Custom Endpoints
 
