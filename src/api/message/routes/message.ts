@@ -6,10 +6,7 @@ export default factories.createCoreRouter("api::message.message", {
   except: [],
   config: {
     find: {
-      auth: {
-        scope: [""],
-      },
-      policies: [],
+      policies: ["global::is-authenticated"],
       middlewares: [],
     },
     findOne: {},
