@@ -1,53 +1,6 @@
-// 'use strict';
+import { PolicyContext } from "../api/auth/policies/is-authenticated";
 
-// module.exports = async (policyContext, config, { strapi }) => {
-//   if (policyContext.state.user) {
-//     return true;
-//   }
-
-//   return false;
-// };
-// import { Strapi } from "@strapi/strapi";
-// import { StrapiContext } from "../api/message/types";
-
-// export default (
-//   policyContext: StrapiContext,
-//   config: any,
-//   { strapi }: { strapi: Strapi }
-// ) => {
-//   if (policyContext.state.user) {
-//     return true;
-//   }
-//   return false;
-// };
-
-// import { verify } from 'jsonwebtoken';
-
-// export default async (ctx, config, { strapi }) => {
-//   try {
-//     const token = ctx.request.header.authorization?.replace('Bearer ', '');
-//     if (!token) {
-//       return false;
-//     }
-
-//     const decoded = verify(token, process.env.JWT_SECRET);
-//     const user = await strapi.query('plugin::users-permissions.user').findOne({
-//       where: { id: decoded.id }
-//     });
-
-//     if (!user) {
-//       return false;
-//     }
-
-//     ctx.state.user = user;
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-
-import { Core } from "@strapi/strapi";
-import { verify } from "jsonwebtoken";
-
+export default async (policyContext: PolicyContext) => {
 export default async (
   policyContext,
   config,
@@ -85,8 +38,8 @@ export default async (
     // }
 
     // policyContext.state.user = user;
+  if (policyContext.state.user) {
     return true;
-  } catch (error) {
-    return false;
   }
+  return false;
 };

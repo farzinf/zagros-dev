@@ -14,7 +14,10 @@ export default factories.createCoreRouter("api::message.message", {
     },
     findOne: {},
     create: {
-      policies: [],
+      // auth: {
+      //   scope: ["authenticated"],
+      // },
+      policies: ["global::is-authenticated"],
       middlewares: [],
     },
     update: {},

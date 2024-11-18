@@ -7,7 +7,7 @@ export default async (
 ) => {
   try {
     // TODO: just valid when auth0 called
-    console.log(" -------- AUTH - IS AUTH0 POLICY -----  ) ");
+    // console.log(" -------- AUTH - IS AUTH0 POLICY -----  ) ");
     return true;
   } catch (error) {
     return false;

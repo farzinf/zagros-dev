@@ -1,17 +1,19 @@
 import { factories } from "@strapi/strapi";
+import { PolicyContext } from "../../auth/policies/is-authenticated";
 
 export default factories.createCoreController(
   "api::message.message",
   ({ strapi }) => ({
     // Method to create a new message
-    async create(ctx) {
+    async create(ctx: PolicyContext) {
       console.log({ body: ctx.request.body });
-      const { content, senderId, recipientId } = ctx.request.body;
+      console.log({ user: ctx.state.user });
+      const { content, recipientId } = ctx.request.body;
 
       try {
         const message = await strapi
           .service("api::message.message")
-          .sendMessage(content, senderId, recipientId);
+          .sendMessage(content, ctx.state.user.id, recipientId);
         return ctx.created(message);
       } catch (error) {
         return ctx.badRequest(error.message);
@@ -19,7 +21,7 @@ export default factories.createCoreController(
     },
 
     // Method to delete a message by ID
-    async delete(ctx) {
+    async delete(ctx: PolicyContext) {
       const { id } = ctx.params;
 
       try {
@@ -33,7 +35,7 @@ export default factories.createCoreController(
     },
 
     // Method to find messages for a user
-    async find(ctx) {
+    async find(ctx: PolicyContext) {
       const { userId } = ctx.query;
 
       try {
